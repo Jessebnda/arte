@@ -75,9 +75,18 @@ function onPointerMoveRotate(event) {
 
 function onWheel(event) {
   event.preventDefault();
-  const delta = Math.sign(event.deltaY);
-  camera.position.z += delta * 0.6;
-  camera.position.z = Math.max(6, Math.min(30, camera.position.z));
+  // Scroll vertical: zoom (como antes)
+  if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+    const delta = Math.sign(event.deltaY);
+    camera.position.z += delta * 0.6;
+    camera.position.z = Math.max(6, Math.min(30, camera.position.z));
+  } else {
+    // Scroll horizontal: rotar globo
+    if (earthMesh) {
+      earthMesh.rotation.y += event.deltaX * 0.005;
+    }
+  }
+  resetAutoRotateTimer();
 }
 
 // Lights
@@ -248,6 +257,25 @@ window.addEventListener('pointerup', (e) => {
     // click
     doRaycastAndShow(e.clientX, e.clientY);
   }
+  resetAutoRotateTimer();
+});
+// --- Auto-rotate logic ---
+let autoRotate = false;
+let autoRotateTimer = null;
+let lastInteraction = Date.now();
+
+function resetAutoRotateTimer() {
+  lastInteraction = Date.now();
+  autoRotate = false;
+  if (autoRotateTimer) clearTimeout(autoRotateTimer);
+  autoRotateTimer = setTimeout(() => {
+    autoRotate = true;
+  }, 3000);
+}
+
+// Cualquier interacción reinicia el temporizador
+['pointerdown', 'pointermove', 'pointerup', 'wheel', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, resetAutoRotateTimer, { passive: true });
 });
 
 renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
@@ -306,6 +334,10 @@ function animate() {
   requestAnimationFrame(animate);
   // update popup position to follow marker
   if (activePopupTarget) updatePopupPosition();
+  // auto-rotate si no hay interacción
+  if (autoRotate && earthMesh && !isPointerDown && !isFocusAnimating) {
+    earthMesh.rotation.y += 0.003;
+  }
   renderer.render(scene, camera);
 }
 
