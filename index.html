@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Globo 3D — Descolonización</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="visually-hidden">Globo 3D — Descolonización</h1>
+      <div id="infoPopup" class="info-popup" style="display:none"></div>
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <div class="project-title">MA: Proyecto integrador Arte e Interculturalidad (U4)</div>
+          <div class="author-name">Jesse Banda Chaidez — <span class="student-id">M039220</span></div>
+        </div>
+        <nav class="tabs" role="tablist" aria-label="Información del proyecto">
+          <button class="tab-btn active" data-target="tab-author" role="tab" aria-selected="true">Autor</button>
+          <button class="tab-btn" data-target="tab-conclusion" role="tab" aria-selected="false">Conclusión</button>
+          <button class="tab-btn" data-target="tab-references" role="tab" aria-selected="false">Referencias</button>
+        </nav>
+        <div class="tab-panels">
+          <div id="tab-author" class="tab-panel" role="tabpanel">
+            <p class="muted">Proyecto integrador — Arte e Interculturalidad</p>
+            <h3>Jesse Banda Chaidez</h3>
+            <p class="student">M039220</p>
+          </div>
+          <div id="tab-conclusion" class="tab-panel" role="tabpanel" style="display:none">
+            <h4>Conclusión</h4>
+            <p>
+              La descolonización de los museos no se trata solo de devolver objetos robados, sino de cambiar la forma en que contamos la historia. Al permitir que las comunidades de origen expliquen su propia cultura y al reconocer los errores del pasado colonial, los museos dejan de ser "vitrinas de trofeos" para convertirse en espacios de verdadero respeto y diálogo intercultural. Este cambio es necesario para que la globalización cultural sea justa y no una imposición de unos sobre otros.
+            </p>
+          </div>
+          <div id="tab-references" class="tab-panel" role="tabpanel" style="display:none">
+            <h4>Referencias</h4>
+            <ul class="refs">
+              <li><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=996692" target="_blank" rel="noopener noreferrer">Fernández, B. (2024). Del gran relato a la posmodernidad. La descolonización de los museos. Dialnet.</a></li>
+              <li><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=9807134" target="_blank" rel="noopener noreferrer">Rojo, A. (2024). ¿Cómo se descoloniza un museo? La problemática de la restitución indígena y la representación multicultural en los museos españoles. Dialnet.</a></li>
+              <li><a href="https://www.rtve.es/play/videos/telediario-2/belgica-reabre-museo-pasado-colonizador-africa/15954339/" target="_blank" rel="noopener noreferrer">RTVE. (2024). La descolonización de los museos: un pasado en revisión [Video].</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Cargar three.js y OrbitControls como scripts UMD para que funcione al abrir por file:// -->
+    <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
